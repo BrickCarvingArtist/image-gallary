@@ -80,7 +80,7 @@ AImage.prototype = {
 	_addEvent : function(){
 		var _this = this;
 		this.dom.onclick = function(){
-			_this.userObj.showBox.display();
+			_this.userObj.showBox.display(_this.index);
 		};
 	}
 };
@@ -116,7 +116,9 @@ ShowImage.prototype = {
 	_init : function(){
 		this.dom = document.createElement("img");
 		this.dom.className = "showImage";
-		this.dom.setAttribute("src", this.userObj.userObj.receiveObj.data[this.userObj.userObj.getCurrentIndex()].imageSrc);
+	},
+	setImage : function(index){
+		this.dom.setAttribute("src", this.userObj.userObj.receiveObj.data[index].imageSrc);
 		this._setPosition();
 	},
 	_setPosition : function(){
@@ -150,7 +152,9 @@ ShowBox.prototype = {
 		this.oShowImage = new ShowImage(this);
 		this.dom.appendChild(this.oShowImage.dom);
 	},
-	display : function(){
+	display : function(index){
+		this.imageIndex = index;
+		this.oShowImage.setImage(this.imageIndex);
 		this.dom.style.display = "block";
 	},
 	close : function(){
