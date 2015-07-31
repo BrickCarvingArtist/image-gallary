@@ -14,6 +14,7 @@ function extend(subClass, supClass){
 /*按钮*/
 function Button(userObj, setting){
 	this.userObj = userObj;
+	this.type = setting.type;
 	this.className = setting.className;
 	this._init();
 }
@@ -22,9 +23,10 @@ Button.prototype = {
 	_init : function(){
 		this.dom = document.createElement("div");
 		this.dom.className = this.className;
+		this._highLight();
 	},
-	_highLight : function(type){
-		this.dom.className = this.userObj.getStatus(type) ? this.className : this.className + " disable";
+	_highLight : function(){
+		this.dom.className = this.userObj.getStatus(this.type) ? this.className : this.className + " disable";
 	}
 };
 /*上一页按钮*/
@@ -38,8 +40,8 @@ Prev.prototype._addEvent = function(){
 	this.dom.onclick = function(){
 		_this.userObj.setCurrentIndex(_this.userObj.getCurrentIndex() - 1);
 		_this.userObj.changeContainerX();
-		_this._highLight(0);
-		_this.userObj.btnNext._highLight(1);
+		_this._highLight();
+		_this.userObj.btnNext._highLight();
 	};
 };
 /*下一页按钮*/
@@ -53,8 +55,8 @@ Next.prototype._addEvent = function(){
 	this.dom.onclick = function(){
 		_this.userObj.setCurrentIndex(_this.userObj.getCurrentIndex() + 1);
 		_this.userObj.changeContainerX();
-		_this._highLight(1);
-		_this.userObj.btnPrev._highLight(0);
+		_this._highLight();
+		_this.userObj.btnPrev._highLight();
 	};
 };
 /*缩略图片*/
@@ -168,7 +170,7 @@ function ImageGallery(obj){
 	this.maxDisplay = this.receiveObj.maxDisplay;
 	this.position = document.getElementById(this.receiveObj.position);
 	this.className = "imageGallery";
-	this.currentIndex = 0;
+	this.setCurrentIndex(0);
 	this._init();
 }
 ImageGallery.prototype = {
@@ -178,7 +180,7 @@ ImageGallery.prototype = {
 	},
 	setCurrentIndex : function(index){
 		this.currentIndex = index < 0 ? 0 : index > this.imageSum - this.maxDisplay ? this.imageSum - this.maxDisplay : index;
-		this.btnPrevStatus = index < 1 ? false : true;
+		this.btnPrevStatus = index < 1 || index === 0 ? false : true;
 		this.btnNextStatus = index > this.imageSum - this.maxDisplay - 1 ? false : true;
 	},
 	getCurrentIndex : function(){
@@ -201,9 +203,11 @@ ImageGallery.prototype = {
 	},
 	_buildButton : function(){
 		this.btnPrev = new Prev(this, {
+			type : 0,
 			className : "btn btnPrev"
 		});
 		this.btnNext = new Next(this, {
+			type : 1,
 			className : "btn btnNext"
 		});
 		this.dom.appendChild(this.btnPrev.dom);
