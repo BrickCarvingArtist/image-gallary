@@ -1,0 +1,42 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+		<link rel="stylesheet" href="reset.css" />
+		<link rel="stylesheet" href="imagegallery.css" />
+		<title>图片展览馆</title>
+	</head>
+	<body>
+		<div id="imageGallery"></div>
+		<script src="imagegallery.js"></script>
+		<script>
+			new ImageGallery({
+				position : "imageGallery",
+				maxDisplay : 4,
+				loop : false,
+				data : [
+					{
+						title : "这是第一张图片",
+						imageSrc : "1.jpg"
+					},
+					{
+						title : "这是第二张图片",
+						imageSrc : "2.jpg"
+					},
+					{
+						title : "这是第三张图片",
+						imageSrc : "3.jpg"
+					},
+					{
+						title : "这是第四张图片",
+						imageSrc : "4.jpg"
+					},
+					{
+						title : "这是第五张图片",
+						imageSrc : "5.jpg"
+					}
+				]
+			});
+		</script>
+	</body>
+</html>
