@@ -100,7 +100,6 @@ AImage.prototype = {
 	_addEvent : function(){
 		var _this = this;
 		this.dom.onclick = function(){
-			console.log(_this.index)
 			_this.userObj.showBox.display(_this.index);
 		};
 	}
@@ -147,8 +146,8 @@ Shadow.prototype = {
 	_addEvent : function(){
 		var _this = this;
 		this.dom.onclick = function(){
-			_this.userObj.close();
 			_this.userObj.oShowImage.oImage[_this.userObj.getImageIndex()].close();
+			_this.userObj.close();
 		}
 	}
 };
