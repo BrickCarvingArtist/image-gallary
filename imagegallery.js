@@ -100,10 +100,35 @@ AImage.prototype = {
 	_addEvent : function(){
 		var _this = this;
 		this.dom.onclick = function(){
+			console.log(_this.index)
 			_this.userObj.showBox.display(_this.index);
 		};
 	}
 };
+/*实际图片*/
+function RealImage(userObj, index, setting){
+	RealImage.superclass.constructor.call(this, userObj, index, setting);
+	this._setPosition();
+}
+extend(RealImage, AImage);
+RealImage.prototype._setPosition = function(){
+	if(this.dom.complete){
+		this.dom.style.marginTop = - this.dom.height / 2 + "px";
+		this.dom.style.marginLeft = - this.dom.width / 2 + "px";
+	}else{
+		this.dom.onload = function(){
+			this.style.marginTop = - this.height / 2 + "px";
+			this.style.marginLeft = - this.width / 2 + "px";
+		};
+	}
+};
+RealImage.prototype.display = function(){
+	this.dom.style.display = "block";
+};
+RealImage.prototype.close = function(){
+	this.dom.style.display = "none";
+};
+RealImage.prototype._addEvent = function(){};
 /*阴影*/
 function Shadow(userObj){
 	this.userObj = userObj;
@@ -123,10 +148,11 @@ Shadow.prototype = {
 		var _this = this;
 		this.dom.onclick = function(){
 			_this.userObj.close();
+			_this.userObj.oShowImage.oImage[_this.userObj.getImageIndex()].close();
 		}
 	}
 };
-/*实际图片*/
+/*实际图片库*/
 function ShowImage(userObj){
 	this.userObj = userObj;
 	this._init();
@@ -134,17 +160,12 @@ function ShowImage(userObj){
 ShowImage.prototype = {
 	constructor : ShowImage,
 	_init : function(){
-		this.dom = document.createElement("img");
-		this.dom.className = "showImage";
+		this._build();
 	},
-	setImage : function(index){
-		this.dom.setAttribute("src", this.userObj.userObj.receiveObj.data[index].imageSrc);
-		this._setPosition();
-	},
-	_setPosition : function(){
-		this.dom.onload = function(){
-			this.style.marginTop = - this.height / 2 + "px";
-			this.style.marginLeft = - this.width / 2 + "px";
+	_build : function(){
+		this.oImage = new Array(this.userObj.userObj.imageSum);
+		for(var i = 0; i < this.userObj.userObj.imageSum; i++){
+			this.oImage[i] = new RealImage(this, i, this.userObj.userObj.receiveObj.data[i]);
 		}
 	}
 };
@@ -170,15 +191,20 @@ ShowBox.prototype = {
 	},
 	_buildShowImage : function(){
 		this.oShowImage = new ShowImage(this);
-		this.dom.appendChild(this.oShowImage.dom);
+		for(var i = 0; i < this.userObj.imageSum; i++){
+			this.dom.appendChild(this.oShowImage.oImage[i].dom);
+		}
 	},
 	display : function(index){
 		this.imageIndex = index;
-		this.oShowImage.setImage(this.imageIndex);
+		this.oShowImage.oImage[this.imageIndex].display();
 		this.dom.style.display = "block";
 	},
 	close : function(){
 		this.dom.style.display = "none";
+	},
+	getImageIndex : function(){
+		return this.imageIndex;
 	}
 };
 /*图片展览馆*/
@@ -212,10 +238,10 @@ ImageGallery.prototype = {
 		this.dom.className = this.className;
 		this.container = document.createElement("div");
 		this.container.className = "container";
+		this._buildImage();
 		if(this.imageSum > this.maxDisplay){
 			this._buildButton();
 		}
-		this._buildImage();
 		this._buildShowBox();
 		this.position.appendChild(this.dom);
 	},
@@ -241,7 +267,7 @@ ImageGallery.prototype = {
 		this.dom.appendChild(this.container);
 	},
 	changeContainerX : function(){
-		this.container.style.marginLeft = - 160 * this.currentIndex + "px";
+		this.container.style.left = 25 - 160 * this.currentIndex + "px";
 	},
 	_buildShowBox : function(){
 		this.showBox = new ShowBox(this);
