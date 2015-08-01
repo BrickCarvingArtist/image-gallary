@@ -10,52 +10,11 @@
 		<div id="imageGallery"></div>
 		<script src="imagegallery.js"></script>
 		<script>
-			new ImageGallery({
-				position : "imageGallery",
-				maxDisplay : 4,
-				loop : false,
-				data : [
-					{
-						title : "这是第一张图片",
-						imageSrc : "1.png"
-					},
-					{
-						title : "这是第二张图片",
-						imageSrc : "2.jpg"
-					},
-					{
-						title : "这是第三张图片",
-						imageSrc : "3.jpg"
-					},
-					{
-						title : "这是第四张图片",
-						imageSrc : "4.jpg"
-					},
-					{
-						title : "这是第五张图片",
-						imageSrc : "5.jpg"
-					},
-					{
-						title : "这是第六张图片",
-						imageSrc : "1.jpg"
-					},
-					{
-						title : "这是第七张图片",
-						imageSrc : "2.jpg"
-					},
-					{
-						title : "这是第八张图片",
-						imageSrc : "3.jpg"
-					},
-					{
-						title : "这是第九张图片",
-						imageSrc : "4.jpg"
-					},
-					{
-						title : "这是第十张图片",
-						imageSrc : "5.jpg"
-					}
-				]
+			new ImageGallery({//实例化图片展览馆
+				position : "imageGallery",//父容器标签id
+				maxDisplay : 4,//当页图片最大展示数量
+				actHighQualityImgUrl : "/acthighqualityimg.json?imgId=",//高清图请求地址
+				actNormalQualityImgUrl : "/actnormalqualityimg.json"//缩略图请求地址
 			});
 		</script>
 	</body>

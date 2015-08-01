@@ -1,0 +1,54 @@
+{
+	data:[
+		{
+			imgId : 0,///高清图图片请求参数ID
+			title : "这是第一张图片",//img标签中title属性
+			imageSrc : "1.png"//缩略图图片地址
+		},
+		{
+			imgId : 1,
+			title : "这是第二张图片",
+			imageSrc : "2.jpg"
+		},
+		{
+			imgId : 2,
+			title : "这是第三张图片",
+			imageSrc : "3.jpg"
+		},
+		{
+			imgId : 3,
+			title : "这是第四张图片",
+			imageSrc : "4.jpg"
+		},
+		{
+			imgId : 4,
+			title : "这是第五张图片",
+			imageSrc : "5.jpg"
+		},
+		{
+			imgId : 5,
+			title : "这是第六张图片",
+			imageSrc : "1.jpg"
+		},
+		{
+			imgId : 6,
+			title : "这是第七张图片",
+			imageSrc : "2.jpg"
+		},
+		{
+			imgId : 7,
+			title : "这是第八张图片",
+			imageSrc : "3.jpg"
+		},
+		{
+			imgId : 8,
+			title : "这是第九张图片",
+			imageSrc : "4.jpg"
+		},
+		{
+			imgId : 9,
+			title : "这是第十张图片",
+			imageSrc : "5.jpg"
+		}
+	]
+}
