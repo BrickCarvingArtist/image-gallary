@@ -21,23 +21,32 @@ function Button(userObj, setting){
 Button.prototype = {
 	constructor : Button,
 	_init : function(){
-		this.dom = document.createElement("div");
-		this.dom.className = this.className;
+		this.container = document.createElement("div");
+		this.container.className = this.className;
 		this._highLight();
 	},
 	_highLight : function(){
-		this.dom.className = this.userObj.getStatus(this.type) ? this.className : this.className + " disable";
+		this.container.className = this.userObj.getStatus(this.type) ? this.className : this.className + " disable";
 	}
 };
 /*上一页按钮*/
 function Prev(userObj, setting){
 	Prev.superclass.constructor.call(this, userObj, setting);
+	this._build();
 	this._addEvent();
 }
 extend(Prev, Button);
+Prev.prototype._build = function(){
+	this.fg = document.createElement("div");
+	this.fg.className = "fg prev";
+	this.bg = document.createElement("div");
+	this.bg.className = "bg prev"
+	this.container.appendChild(this.bg);
+	this.container.appendChild(this.fg);
+};
 Prev.prototype._addEvent = function(){
 	var _this = this;
-	this.dom.onclick = function(){
+	this.fg.onclick = function(){
 		_this.userObj.setCurrentIndex(_this.userObj.getCurrentIndex() - 1);
 		_this.userObj.changeContainerX();
 		_this._highLight();
@@ -47,12 +56,21 @@ Prev.prototype._addEvent = function(){
 /*下一页按钮*/
 function Next(userObj, setting){
 	Prev.superclass.constructor.call(this, userObj, setting);
+	this._build();
 	this._addEvent();
 }
 extend(Next, Button);
+Next.prototype._build = function(){
+	this.fg = document.createElement("div");
+	this.fg.className = "fg next";
+	this.bg = document.createElement("div");
+	this.bg.className = "bg next"
+	this.container.appendChild(this.bg);
+	this.container.appendChild(this.fg);
+};
 Next.prototype._addEvent = function(){
 	var _this = this;
-	this.dom.onclick = function(){
+	this.fg.onclick = function(){
 		_this.userObj.setCurrentIndex(_this.userObj.getCurrentIndex() + 1);
 		_this.userObj.changeContainerX();
 		_this._highLight();
@@ -210,8 +228,8 @@ ImageGallery.prototype = {
 			type : 1,
 			className : "btn btnNext"
 		});
-		this.dom.appendChild(this.btnPrev.dom);
-		this.dom.appendChild(this.btnNext.dom);
+		this.dom.appendChild(this.btnPrev.container);
+		this.dom.appendChild(this.btnNext.container);
 	},
 	_buildImage : function(){
 		this.oImage = new Array(this.imageLen);
