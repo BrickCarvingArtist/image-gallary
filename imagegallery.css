@@ -1,15 +1,13 @@
 .imageGallery{
 	position:relative;
-	float:left;
+	margin:200px auto;
 	padding:10px 25px;
 	width:630px;
 	height:100px;
 	overflow:hidden;
 }
 .imageGallery .container{
-	position:absolute;
-	top:10px;
-	left:25px;
+	float:left;
 	width:9999px;
 }
 .imageGallery .container img{
@@ -25,7 +23,7 @@
 	position:absolute;
 	top:0;
 	width:25px;
-	height:120px;
+	height:100%;
 	background-color:rgb(255, 255, 255);
 }
 .imageGallery .btn.btnPrev{
@@ -44,7 +42,7 @@
 }
 .imageGallery .btn .fg{
 	float:left;
-	margin-top:-82px;
+	margin-top:-77px;
 	width:0;
 	height:0;
 	border-top:12px solid transparent;
@@ -52,9 +50,9 @@
 	cursor:pointer;
 }
 .imageGallery .btn .bg.prev{
-	margin-top:45px;
+	margin-top:50px;
 	margin-right:10px;
-	margin-bottom:55px;
+	margin-bottom:50px;
 	border-right:15px solid rgb(55, 141, 233);
 }
 .imageGallery .btn .fg.prev{
@@ -63,8 +61,8 @@
 	border-right:12px solid rgb(255, 255, 255);
 }
 .imageGallery .btn .bg.next{
-	margin-top:45px;
-	margin-bottom:55px;
+	margin-top:50px;
+	margin-bottom:50px;
 	margin-left:10px;
 	border-left:15px solid rgb(55, 141, 233);
 }
@@ -94,9 +92,8 @@
 	opacity:.7;
 	filter:alpha(opacity=70);
 }
-.showBox img{
+.showBox .showImage{
 	position:absolute;
 	top:50%;
 	left:50%;
-	display:none;
 }
