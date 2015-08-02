@@ -11,10 +11,10 @@
 		<script src="imagegallery.js"></script>
 		<script>
 			new ImageGallery({//实例化图片展览馆
-				position : "imageGallery",//父容器标签id
-				maxDisplay : 4,//当页图片最大展示数量
-				actHighQualityImgUrl : "/acthighqualityimg.json?imgId=",//高清图请求地址
-				actNormalQualityImgUrl : "/actnormalqualityimg.json"//缩略图请求地址
+				position : "imageGallery",//必选，父容器标签id
+				maxDisplay : -1,//可选，当页图片最大展示数量(小于1默认设为4，大于6默认设为6)
+				actNormalQualityImgUrl : "/actnormalqualityimg.json",//必选，缩略图请求地址
+				actHighQualityImgUrl : "/acthighqualityimg.json?imgId="//可选，高清图请求地址
 			});
 		</script>
 	</body>

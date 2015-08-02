@@ -3,7 +3,7 @@ var ImageGallery = window.ImageGallery || (function(setting){
 	ImageGallery.INFO = {
 		AUTHOR : "BrickCarvingArtist/GitHub",
 		BEGINTIME : "2015/07/31",
-		LATESTRELEASE : "2015/08/01",
+		LATESTRELEASE : "2015/08/02",
 		LICENSE : "LGPL",
 		NAME : "ImageGallery",
 		VERSION : "0.1"
@@ -155,13 +155,13 @@ var ImageGallery = window.ImageGallery || (function(setting){
 			};
 		}
 	};
-	/*实际图片*/
-	function RealImage(userObj, index, setting){
-		RealImage.superclass.constructor.call(this, userObj, index, setting);
+	/*高清图片*/
+	function HighQualityImage(userObj, index, setting){
+		HighQualityImage.superclass.constructor.call(this, userObj, index, setting);
 		this._setPosition();
 	}
-	extend(RealImage, AImage);
-	RealImage.prototype._setPosition = function(){
+	extend(HighQualityImage, AImage);
+	HighQualityImage.prototype._setPosition = function(){
 		if(this.dom.complete){
 			this.dom.style.marginTop = - this.dom.height / 2 + "px";
 			this.dom.style.marginLeft = - this.dom.width / 2 + "px";
@@ -172,7 +172,7 @@ var ImageGallery = window.ImageGallery || (function(setting){
 			};
 		}
 	};
-	RealImage.prototype.display = function(){
+	HighQualityImage.prototype.display = function(){
 		if(this.userObj.userObj.userObj.receiveObj.actHighQualityImgUrl){
 			var _this = this;
 			new Ajax({
@@ -186,10 +186,10 @@ var ImageGallery = window.ImageGallery || (function(setting){
 		}
 		this.dom.style.display = "block";
 	};
-	RealImage.prototype.close = function(){
+	HighQualityImage.prototype.close = function(){
 		this.dom.style.display = "none";
 	};
-	RealImage.prototype._addEvent = function(){};
+	HighQualityImage.prototype._addEvent = function(){};
 	/*阴影*/
 	function Shadow(userObj){
 		this.userObj = userObj;
@@ -226,7 +226,7 @@ var ImageGallery = window.ImageGallery || (function(setting){
 		_build : function(){
 			this.oImage = new Array(this.userObj.userObj.imageSum);
 			for(var i = 0; i < this.userObj.userObj.imageSum; i++){
-				this.oImage[i] = new RealImage(this, i, this.userObj.userObj.receiveObj.data[i]);
+				this.oImage[i] = new HighQualityImage(this, i, this.userObj.userObj.receiveObj.data[i]);
 			}
 		}
 	};
@@ -274,7 +274,6 @@ var ImageGallery = window.ImageGallery || (function(setting){
 		var _this = this;
 		this._getNormalQualityImg(function(){
 			_this.imageSum = _this.receiveObj.data.length;
-			_this.maxDisplay = _this.receiveObj.maxDisplay;
 			_this.position = document.getElementById(_this.receiveObj.position);
 			_this.className = "imageGallery";
 			_this.setCurrentIndex(0);
@@ -312,6 +311,7 @@ var ImageGallery = window.ImageGallery || (function(setting){
 		_buildAll : function(){
 			this.dom = document.createElement("div");
 			this.dom.className = this.className;
+			this.dom.style.width = (this.maxDisplay = this.receiveObj.maxDisplay > 0 ? this.receiveObj.maxDisplay > 6 ? 6 : this.receiveObj.maxDispla : 4) * 160 - 10 + "px";
 			this.container = document.createElement("div");
 			this.container.className = "container";
 			this._buildImage();
