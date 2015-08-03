@@ -311,7 +311,7 @@ var ImageGallery = window.ImageGallery || (function(setting){
 		_buildAll : function(){
 			this.dom = document.createElement("div");
 			this.dom.className = this.className;
-			this.dom.style.width = (this.maxDisplay = this.receiveObj.maxDisplay > 0 ? this.receiveObj.maxDisplay > 6 ? 6 : this.receiveObj.maxDispla : 4) * 160 - 10 + "px";
+			this.dom.style.width = (this.maxDisplay = this.receiveObj.maxDisplay > 0 ? this.receiveObj.maxDisplay > 6 ? 6 : this.receiveObj.maxDisplay : 4) * 160 - 10 + "px";
 			this.container = document.createElement("div");
 			this.container.className = "container";
 			this._buildImage();
