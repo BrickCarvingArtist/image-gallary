@@ -1,5 +1,6 @@
 var ImageGallery = window.ImageGallery || (function(setting){
 	"use strict";
+	/*版权信息*/
 	ImageGallery.INFO = {
 		AUTHOR : "BrickCarvingArtist/GitHub",
 		BEGINTIME : "2015/07/31",
