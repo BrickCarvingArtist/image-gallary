@@ -5,7 +5,7 @@ var ImageGallery = window.ImageGallery || (function(setting){
 		AUTHOR : "BrickCarvingArtist/GitHub",
 		BEGINTIME : "2015/07/31",
 		LATESTRELEASE : "2015/08/02",
-		LICENSE : "LGPL",
+		LICENSE : "MIT",
 		NAME : "ImageGallery",
 		VERSION : "0.1"
 	};
@@ -25,7 +25,7 @@ var ImageGallery = window.ImageGallery || (function(setting){
 	};
 	/*Ajax类*/
 	function Ajax(obj){
-		this.receiveObj = obj;
+		this.receiveData = obj;
 		this.transportData();
 	}
 	Ajax.prototype = {
